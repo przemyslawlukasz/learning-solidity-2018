@@ -11,7 +11,7 @@ contract AccountChecker is Ownable {
     }
     
     function contractAddress() external view returns(address) {
-        return address(this);
+        return this;
     }
     
     function callerAddress() external view returns(address) {
@@ -23,7 +23,7 @@ contract AccountChecker is Ownable {
     }
     
     function ownerBalance() external view onlyOwner() returns(uint) {
-        return address(owner).balance;
+        return owner.balance;
     }
     
     function callerBalance() external view returns(uint) {
