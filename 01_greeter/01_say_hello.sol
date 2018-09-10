@@ -5,6 +5,8 @@ contract Greeter {
 	string greetings;
 	address owner;
 	
+	event Greetings(address who, string greetings);
+	
 	constructor(string _greetings) public {
 		greetings = _greetings;
 		owner = msg.sender;
@@ -16,10 +18,9 @@ contract Greeter {
 	}
 	
 	function sayHello() public view returns (string) {
-		if (msg.sender == owner)
-			return "Hello Daddy";
-		else 
-			return greetings;
+		string result = (msg.sender == owner) ? "Hello Daddy" : greetings;
+		emit Greetings(msg.sender, result);
+		return result;
 	}
 	
 	function changeGreetings(string _newGreetings) public onlyOwner {
